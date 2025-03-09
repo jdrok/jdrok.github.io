@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lister</title>
+  <link rel="icon" href="lister.png" type="image/png">
+  <link rel='stylesheet' id='bootstrap-cdn-css' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?ver=1.0' type='text/css' media='all' />
+  <style>
+    html, body {
+        background-color: #3c3c3c;
+        color: #fff;
+    }
+    input {
+        background-color: #000;
+        color: #fff;
+    }
+    button {
+        background-color: #464646;
+        color: #fff;
+    }
+
+
+    #list {
+        width: 100%;
+    }
+    .list-item {
+        border: 1px solid #fff;
+        border-radius: 5px;
+        padding: 4px;
+        margin: 4px 0;
+    }
+    .list-item input, .list-item textarea {
+        width: 100%;
+    }
+    .list-item textarea {
+        height: 5em;
+        color: #fff;
+    }
+    .textarea-focused {
+        border: 1px solid #00f957 !important;
+        outline: none;
+    }
+    
+    #start {
+        width: 50px;
+    }
+
+    div.list-item:nth-child(odd), div.list-item:nth-child(odd) textarea {
+        background-color: #222;
+    }    
+    div.list-item:nth-child(even), div.list-item:nth-child(even) textarea {
+        background-color: #3c3c3c;
+    }
+
+    .num-text {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .d-none {
+        display: none;
+    }
+    .float-right {
+        float: right;
+    }
+  </style>
+</head>
+<body>
+
+    From chapter <input id="start" placeholder="Start" value="1" onclick="this.select()" onkeyup="setStart()">
+    to <b id="to">10</b>
+    <button class="float-right" onclick="empty()">Empty</button>
+    <hr>
+    <div id="list">
+        
+    </div>
+
+    <script>
+
+        function setStart() {            
+            var start = document.getElementById('start');
+            var intStart = parseInt(start.value);
+            localStorage.setItem("novel-l-start", intStart);
+
+            for(let i = 1; i <= 10; i++) {
+                document.getElementById('num-text-'+i).innerHTML = "Ch."+intStart;
+                intStart++;
+            }
+
+            //to
+            document.getElementById('to').innerHTML = parseInt(start.value) + 9;
+
+        }
+
+        function empty() {
+            const confirmation = confirm("Are you sure you want to EMPTY the textarea?");
+
+            if (confirmation) {
+                console.log("Action confirmed!");
+                const listDiv = document.getElementById('list');
+                const textareas = listDiv.querySelectorAll('textarea');
+
+                // Loop through each textarea and clear its value
+                textareas.forEach(textarea => {
+                    textarea.value = '';
+                    removeNovelDataItems();
+                });
+            } else {
+                console.log("Action canceled.");
+                // Optionally, add code to handle the cancellation
+            }
+        }
+
+        function removeNovelDataItems() {
+            const prefix = "novel-l-data-";
+            const keysToRemove = [];
+
+            // Iterate through localStorage keys
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+
+                // Check if the key starts with the prefix
+                if (key.startsWith(prefix)) {
+                keysToRemove.push(key);
+                }
+            }
+
+            // Remove the matching keys
+            keysToRemove.forEach(key => {
+                localStorage.removeItem(key);
+            });
+
+            console.log("Removed items with prefix: " + prefix);
+        }
+
+        function onTextareaChange(id) {
+            var myTextarea = document.getElementById(id);
+            localStorage.setItem("novel-l-data-"+id, myTextarea.value);
+        }
+
+
+
+        //Up & Down arrow buttons
+        function toup(id) {
+            const textarea = document.getElementById(id);
+            textarea.selectionStart = 0;
+            textarea.selectionEnd = 0;
+            textarea.focus(); // Optional: Focus the textarea
+        }
+
+        function todown(id) {
+            const textarea = document.getElementById(id);
+            const length = textarea.value.length;
+            textarea.selectionStart = length;
+            textarea.selectionEnd = length;
+            textarea.focus(); // Optional: Focus the textarea
+        }
+
+        //Add ++++ separator
+        function addPlus(id) {
+            var textarea = document.getElementById(id);
+            var cursorPosition = textarea.selectionStart;
+            var textToAdd = "++++++++++++++++++++";
+
+            var currentValue = textarea.value;
+            var newValue = currentValue.substring(0, cursorPosition) + textToAdd + currentValue.substring(cursorPosition);
+
+            textarea.value = newValue;
+            textarea.selectionStart = textarea.selectionEnd = cursorPosition + textToAdd.length; // Move cursor after inserted text.
+            textarea.focus(); // Keep focus on textarea.
+        }
+
+        //Add ##### DONE #####
+        function addDone(id) {
+            var textarea = document.getElementById(id);
+            var cursorPosition = textarea.selectionStart;
+            var textToAdd = "##### DONE #####";
+
+            var currentValue = textarea.value;
+            var newValue = currentValue.substring(0, cursorPosition) + textToAdd + currentValue.substring(cursorPosition);
+
+            textarea.value = newValue;
+            textarea.selectionStart = textarea.selectionEnd = cursorPosition + textToAdd.length; // Move cursor after inserted text.
+            textarea.focus(); // Keep focus on textarea.
+        }
+
+        //Copy the textarea 
+        function copy(id) {
+            const textarea = document.getElementById(id);
+            textarea.select(); // Select the text inside the textarea
+            textarea.setSelectionRange(0, textarea.value.length); // For mobile compatibility
+
+            try {
+                document.execCommand("copy"); // Copy the selected text
+                console.log("Text copied to clipboard!"); // Optional confirmation
+            } catch (err) {
+                console.error("Unable to copy text: ", err);
+                //fallback method for browsers that don't support document.execCommand
+                navigator.clipboard.writeText(textarea.value);
+            }
+
+            textarea.blur(); // Deselect the text
+        }
+
+
+
+        /************************************** On Page LOAD ***********************************/
+        
+        addEventListener("DOMContentLoaded", onLoadFunctions);
+
+        function onLoadFunctions() {
+            getStart();
+            generateList();
+            populateTextarea();
+        }
+
+        
+        function getStart() {
+            var start = document.getElementById('start');
+            if(localStorage.getItem('novel-l-start') !== null) {
+                start.value = localStorage.getItem('novel-l-start');
+            } else {
+                start.value = 1;
+                localStorage.setItem('novel-l-start', 1)
+            }
+        }
+
+        function generateList() {
+            const novel = document.getElementById('novel');
+            const list = document.getElementById('list');
+            const start = Number(document.getElementById('start').value);
+            const count = start + 10;
+            var id = 1;
+                
+            for (let i = start; i < count; i++) {
+
+                list.innerHTML += `
+                    <div class="list-item" id="item-${id}">
+                        <span class="num-text" id="num-text-${id}">Ch.${i}</span>
+                        <button onclick="toup(${id})">&nbsp;&uarr;&nbsp;</button>
+                        &nbsp;&nbsp;
+                        <button onclick="todown(${id})">&nbsp;&darr;&nbsp;</button>
+                        &nbsp;&nbsp;
+                        <button onclick="addPlus(${id})">+++</button>
+                        &nbsp;&nbsp;
+                        <button onclick="addDone(${id})">#DONE#</button>
+                        <button class="float-right" onclick="copy(${id})">Copy</button>
+                        <textarea id="${id}" onfocus="this.classList.add('textarea-focused')" onblur="this.classList.remove('textarea-focused')" onkeyup="onTextareaChange(this.id)"></textarea>
+                    </div>`;
+                id++;
+
+            }
+        }
+
+        function populateTextarea() {
+            for(let i = 1; i <= 10; i++) {
+                document.getElementById(i).value = localStorage.getItem("novel-l-data-"+i);
+                
+            }
+        }
+
+    </script>
+</body>
+</html>
