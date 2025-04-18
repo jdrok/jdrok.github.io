@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novel Reader</title>
+  <link rel="icon" href="novel-reader.png" type="image/png">
+  <link href="https://fonts.cdnfonts.com/css/montserrat" rel="stylesheet">
+  <link rel='stylesheet' href='novel-reader.css' type='text/css' media='all' /> 
+  <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
+
+</head>
+<body>
+  
+  <div id="app">
+
+    <div id="success-msg"></div>
+    <button id="go-sep-btn" onclick="goSepBtnShow(0)">Go to &rarr; +++</button>
+
+
+
+    
+    <!-- Novel List View -->
+    <div id="novel-list" class="view">
+      <div class="header">
+        <p class="title">Novels</p>
+        <select id="filter-adult">
+          <option value="all">All</option>
+          <option value="0">Non-adult</option>
+          <option value="1">Adult</option>
+        </select>
+        <select id="filter-country">
+          <option value="all">All</option>
+          <option value="JP">JP</option>
+          <option value="CN">CN</option>
+          <option value="KR">KR</option>
+        </select>
+        <button onclick="changeView('add-novel')">&#65291; New</button>
+      </div>
+      <div class="body prevent-select">
+        <ul id="novels-ul"></ul>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Add New Novel View -->
+    <div id="add-novel" class="view">
+      <div class="header">
+        <button onclick="changeView('novel-list')">&larr; Novels</button>
+        <p class="title">Add New Novel</p>
+      </div>
+      
+      <div class="body">
+        <textarea id="add-novel-title" rows="3" placeholder="Title"></textarea>
+
+        <textarea id="add-novel-synopsis" rows="20" placeholder="Synopsis"></textarea>
+        
+        <select id="add-novel-adult">
+          <option value="0">Non-adult</option>
+          <option value="1">Adult</option>
+        </select>
+
+        <select id="add-novel-country" style="margin: 10px 0 10px 20px;">
+          <option value="JP">JP</option>
+          <option value="CN">CN</option>
+          <option value="KR">KR</option>
+        </select>
+        <br>
+
+        <button onclick="saveNovel()">Save Novel</button>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Edit Novel View -->
+    <div id="edit-novel" class="view">
+      <div class="header">
+        <p class="title">Edit Novel</p>
+        <button onclick="changeView('chapter-list')">Chapters</button>
+      </div>
+      <div class="body">
+        <textarea id="edit-novel-title" rows="3" placeholder="Title"></textarea>
+
+        <textarea id="edit-novel-synopsis" rows="20" placeholder="Synopsis"></textarea>
+        
+        <select id="edit-novel-adult">
+          <option value="0">Non-adult</option>
+          <option value="1">Adult</option>
+        </select>
+
+        <select id="edit-novel-country" style="margin: 10px 0 10px 20px;">
+          <option value="JP">JP</option>
+          <option value="CN">CN</option>
+          <option value="KR">KR</option>
+        </select>
+        <br>
+
+        <button onclick="updateNovel()">Update Novel</button>
+
+      </div>
+
+    </div>
+    
+
+
+
+
+    <!-- Chapter List View -->
+    <div id="chapter-list" class="view">
+        <p class="cl-novel-title"><span id="cl-novel-title"></span> <button onclick="changeView('edit-novel')">Edit</button></p>
+        <div class="header">
+          <button onclick="changeView('novel-list')">&larr; Novels</button>
+          <button onclick="deleteYN()" class="btn-red">&#10005;</button>
+          <button onclick="changeView('glossary-list')">Glossary</button>
+          <button onclick="addChapter()">&#65291; New Chapter</button>
+        </div>
+        
+        <div class="cl-novel-title-sm"></div>
+      <div class="body prevent-select">
+        <ul id="chapters-UL"></ul>
+      </div>
+
+    </div>
+
+    
+
+
+
+    <!-- View Chapter View -->
+    <div id="view-chapter" class="view">
+      <div class="header">
+        <div>
+          <button onclick="changeView('novel-list')" class="vc-btn">&larr; Novels</button>&nbsp;&nbsp;
+          <button onclick="changeView('chapter-list')" class="vc-btn">&larr; Chapters</button>
+        </div>
+        <!--<button onclick="deleteYN()" class="btn-red">&#10005;</button>
+        <button>&darr; Encoded DL</button>-->
+        <button onclick="changeView('edit-chapter')" class="vc-btn">Edit</button>
+      </div>
+      <div id="ct-sm-view" class="chapter-title-sm"></div>
+      <div id="chapter-text-view"></div>
+    </div>
+
+
+
+
+    
+    <!-- Edit Chapter View -->
+    <div id="edit-chapter" class="view">
+      <div class="header">
+        <select id="ctt-font-size" onchange="setFontSize(this.value)" style="padding: 0;">
+          <option value="14">14px</option>
+          <option value="15">15px</option>
+          <option value="16">16px</option>
+          <option value="17">17px</option>
+          <option value="18">18px</option>
+          <option value="19">19px</option>
+          <option value="20">20px</option>
+          <option value="21">21px</option>
+          <option value="22">22px</option>
+          <option value="23">23px</option>
+          <option value="24">24px</option>
+        </select>
+
+        <div>
+          <button onclick="toup()">&uarr;</button>
+          &nbsp;
+          <button onclick="todown()">&darr;</button>
+        </div>
+
+        <select id="ctt-seps" onchange="addData(this.value, 1)" style="padding:0;width:60px">
+          <option value="">------</option>
+          <option value="---sep1---">Blank Separator</option>
+          <option value="---sep2---">✳✳✳</option>
+          <option value="++++++++++++++++++++">+++</option>
+          <option value="&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;">10 New lines</option>
+        </select>
+
+        <button onclick="changeView('add-glossary')">+ &#129489;</button>
+        
+        <div>
+          <button onclick="addData('–')">&nbsp;–&nbsp;</button>
+          &nbsp;
+          <button onclick="addData('*')">&nbsp;*&nbsp;</button>
+        </div>
+
+        <button id="save-chapter-btn" class="disabled" onclick="changeView('view-chapter');saveChapter()">View</button>
+      </div>
+      <div id="ct-sm-edit" class="chapter-title-sm"></div>
+      <textarea id="chapter-text-edit" oninput="chapterInput()" onpaste="goSepBtnShow(1)"></textarea>
+    </div>
+
+
+
+
+
+    <!-- Glossary View -->
+    <div id="glossary-list" class="view">
+      <div id="glossary-nt" class="chapter-title-sm">Novel Title Sample</div>
+      <div class="header">
+        <button onclick="changeView('chapter-list')">&larr; Chapter List</button>
+        <button onclick="changeView('add-glossary')">New Glossary</button>
+        <button onclick="changeView('edit-chapter')" class="btn-edit" id="gl-edit-btn">Edit Chapter &rarr;</button>
+      </div>
+      <div class="body">
+        <table id="gl-table"></table>
+      </div>
+    </div>
+
+
+
+    
+
+    
+    <!-- Add Glossary View -->
+    <div id="add-glossary" class="view">
+      <div id="glossary-nt" class="chapter-title-sm">Novel Title Sample</div>
+      <div class="header">
+        <button onclick="changeView('chapter-list')">&larr; Chapter List</button>
+        <button onclick="changeView('glossary-list')">&larr; Glossary</button>
+        <button onclick="changeView('edit-chapter')" class="btn-edit">Edit Chapter &rarr;</button>
+      </div>
+
+      <div class="body">
+        <p class="title">Add New Glossary</p>
+        <select onchange="isCharacter('add')" id="add-gl-type" style="width: 100%;">
+          <option value="">Select a type (Other)</option>
+          <option value="1">Character</option>
+          <option value="2">Place/Ability Name/Unique Term/Etc..</option>
+        </select>
+        <select id="add-gl-gender" style="width:100%;margin:10px 0" disabled>
+          <option value="">Select a gender</option>
+          <option value="0">Unknown</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+        <input type="text" id="add-gl-tl-text" placeholder="Translated Text">
+        <input type="text" id="add-gl-orig-text" placeholder="Original Text" style="margin:10px 0">
+        <textarea id="add-gl-desc" rows="10" placeholder="Glossary Description" style="margin-bottom: 10px;width: 98%;"></textarea>
+        
+        First appearance:
+        <div id="add-gl-first-appearance"></div>
+        <div style="text-align: right; margin-top: 10px;">
+            <button onclick="saveGlossary()">Save Glossary</button>
+          </div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <!-- Edit Glossary View -->
+    <div id="edit-glossary" class="view">
+      <div id="glossary-nt" class="chapter-title-sm">Novel Title Sample</div>
+      <div class="header">
+        <button onclick="changeView('chapter-list')">&larr; Chapter List</button>
+        <button onclick="changeView('glossary-list')">&larr; Glossary</button>
+        <button onclick="changeView('edit-chapter')" class="btn-edit" id="gl-edit-btn-2">Edit Chapter &rarr;</button>
+      </div>
+
+      <div class="body">
+        <p class="title">Edit Glossary</p>
+        <select onchange="isCharacter('edit')" id="edit-gl-type" style="width: 100%;">
+          <option value="">Select a type (Other)</option>
+          <option value="1">Character</option>
+          <option value="2">Place/Ability Name/Unique Term/Etc..</option>
+        </select>
+        <select id="edit-gl-gender" style="width:100%;margin:10px 0" disabled>
+          <option value="">Select a gender</option>
+          <option value="0">Unknown</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+        <input type="text" id="edit-gl-tl-text" placeholder="Translated Text">
+        <input type="text" id="edit-gl-orig-text" placeholder="Original Text" style="margin:10px 0">
+        <textarea id="edit-gl-desc" rows="10" placeholder="Glossary Description" style="margin-bottom: 10px;width: 98%;"></textarea>
+        
+        First appearance:
+        <div id="edit-gl-first-appearance"></div>
+        <div style="text-align: right; margin-top: 10px;">
+            <button onclick="updateGlossary()">Save Glossary</button>
+          </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  
+  <script src="novel-reader.js"></script>
+
+</body>
+</html>

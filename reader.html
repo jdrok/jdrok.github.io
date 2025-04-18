@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reader</title>
+  <link rel="icon" href="reader.png" type="image/png">
+  <link rel='stylesheet' id='bootstrap-cdn-css' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css?ver=1.0' type='text/css' media='all' />
+  <style>
+    body, textarea {
+        background-color: #313131;
+        color: #e0e0e0;
+        padding-top: 2px;
+    }
+    
+    input {
+        background-color: #000;
+        color: #fff;
+    }
+    button {
+        background-color: #222;
+        color: #fff;
+    }
+
+    .reader {
+        position: fixed;
+        top: 65px;
+        bottom: 0;
+        width: 100%;
+    }
+    .reader textarea {
+        width: 100%;
+        height: 100%;
+        color: #bbb;
+        outline: none;
+    }
+    #chapter-title {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        font-size: 12px;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 60%;
+        float: left;
+        line-height: 15px;
+    }
+
+    #data-input {
+        display: inline;
+        margin-right: 20px;
+    }
+    /*#saveBtn, #editBtn {
+        position: fixed;
+        z-index: 999;
+        right: 0;
+        top: 120px;
+    }
+    #pasteBtn {
+        position: fixed;
+        z-index: 999;
+        right: 0;
+        top: 85px;
+        color: #b8ed25;
+    }*/
+    #saveBtn {
+        color: #6161f2;
+    }
+    #editBtn {
+        color: #ca9d09;
+        display: none;
+    }
+
+    #downloadBtn {
+        display: none;
+        margin-left: 38px;
+        margin-right: 80px;
+        color: #17b017;
+    }
+
+    .title-ctrl {
+        margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+    
+    <button style="margin-right: 20px; color: red;" onclick="clearTextarea()">Clear</button>
+    <div id="data-input">
+        <button onclick="addData('–')">&nbsp;–&nbsp;</button>&nbsp;
+        <button onclick="addData('“')">&nbsp;“&nbsp;</button>&nbsp;
+        <button onclick="addData('*')">&nbsp;*&nbsp;</button>&nbsp;
+        <button onclick="addData('’')">&nbsp;’&nbsp;</button>&nbsp;
+        <button onclick="addData('”')">&nbsp;”&nbsp;</button>
+    </div>
+    <button id="downloadBtn" onclick="downloadChapter()">Download</button>
+    <button onclick="setFS(0)">&nbsp;-&nbsp;</button>
+    <button onclick="setFS(1)">&nbsp;+&nbsp;</button>
+
+    <div class="title-ctrl">
+        <span id="chapter-title"></span>
+        <button id="saveBtn" onclick="save()" style="float: right; margin-right: 5px;">Save</button>
+        <button id="editBtn" onclick="edit()" style="float: right; margin-right: 5px;">&nbsp;Edit</button>
+        <button id="pasteBtn" onclick="paste()" style="float: right; margin-left: 5px; margin-right: 5px;">Paste L</button>
+    </div>
+
+    <div class="reader">
+        <textarea id="content" oninput="setChapterContent(this)"></textarea>
+    </div>
+
+    <script>
+        const textarea = document.getElementById('content');
+
+
+        //Set the chapter's content
+        function setChapterContent(textarea) {
+            localStorage.setItem("novel-r-content", textarea.value);
+
+            getTitle(textarea);
+        }
+
+        //Get the title of the chapter
+        function getTitle(textarea) {
+            const text = textarea.value;
+            const firstLine = text.split('\n')[0];
+            console.log('First line:', firstLine);
+
+            document.getElementById('chapter-title').innerHTML = firstLine;
+        }
+
+        function clearTextarea() {
+            const confirmation = confirm("Are you sure you want to CLEAR the textarea?");
+
+            if (confirmation) {
+                textarea.value = '';
+                localStorage.setItem("novel-r-content", '');
+                getTitle(textarea);
+            } else {
+                console.log("Action canceled.");
+                // Optionally, add code to handle the cancellation
+            }
+        }
+
+        function saveTextareaScroll() {
+            if (!textarea) return; // Exit if textarea doesn't exist
+
+            textarea.addEventListener('scroll', () => {
+                localStorage.setItem('novel-r-scroll', textarea.scrollTop);
+            });
+
+            // Restore scroll position on page load
+            const savedScroll = localStorage.getItem('novel-r-scroll');
+            if (savedScroll) {
+                textarea.scrollTop = parseInt(savedScroll, 10);
+                
+            }
+        }
+
+
+
+
+        //Add data input
+        function addData(data) {
+            var cursorPosition = textarea.selectionStart;
+            var textToAdd = data;
+
+            var currentValue = textarea.value;
+            var newValue = currentValue.substring(0, cursorPosition) + textToAdd + currentValue.substring(cursorPosition);
+
+            textarea.value = newValue;
+            textarea.selectionStart = textarea.selectionEnd = cursorPosition + textToAdd.length; // Move cursor after inserted text.
+            textarea.focus(); // Keep focus on textarea.
+            setChapterContent(textarea);
+        }
+
+
+
+        //save & edit button / hide show elements     
+        const dataInput = document.getElementById('data-input');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const editBtn = document.getElementById('editBtn');
+
+        function save() {
+            var currentFS = localStorage.getItem('novel-r-font-size');
+            localStorage.setItem('novel-r-save', "readonly");
+
+            dataInput.style.display = "none";
+            downloadBtn.style.display = "inline";
+
+            saveBtn.style.display = "none";
+            editBtn.style.display = "inline";
+
+            textarea.style.cssText = "border: 1px solid #000; font-size: "+currentFS+"px";
+            textarea.readOnly = true;
+            
+            document.getElementById("downloadBtn").disabled = false;
+            
+        }
+        function edit() {
+            var currentFS = localStorage.getItem('novel-r-font-size');
+            localStorage.setItem('novel-r-save', "editable");
+            
+            dataInput.style.display = "inline";
+            downloadBtn.style.display = "none";
+
+            saveBtn.style.display = "inline";
+            editBtn.style.display = "none";
+
+            textarea.style.cssText = "border: 1px solid #ca9d09; font-size: "+currentFS+"px";
+            textarea.readOnly = false;
+        }
+
+
+
+        //Paste from Lister
+        function paste() {
+            var copiedText = localStorage.getItem('novel-l-copied-text');
+            if (textarea.value.length > 0) {
+                alert("The textbox is not empty!");
+            } else {
+                textarea.value = copiedText;
+                onTextareaChange();
+                getTitle(textarea);
+            }
+        }
+
+        function onTextareaChange() {
+            localStorage.setItem("novel-r-content", textarea.value);
+        }
+
+
+        //Font size 
+        function setFS(data) {
+            var currentFS = localStorage.getItem('novel-r-font-size');
+            
+
+            if(data == 1) {
+                var newFS = parseInt(currentFS) + 1;
+                localStorage.setItem('novel-r-font-size', newFS);
+            } else {
+                var newFS = parseInt(currentFS) - 1;
+                localStorage.setItem('novel-r-font-size', newFS);
+            }
+            textarea.style.cssText = "font-size: "+newFS+"px";
+        }
+        
+
+        //DOWNLOAD
+        function downloadChapter() {
+            const dataUri = 'data:text/plain;charset=utf-8,' + encodeURIComponent(textarea.value);
+            const a = document.createElement('a');
+            a.href = dataUri;
+            a.download = document.getElementById('chapter-title').innerHTML+'.txt';
+            a.click();
+
+            document.getElementById("downloadBtn").disabled = true;
+        }
+
+
+
+        
+
+
+        /************************************** On Page LOAD ***********************************/
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            getChapterContent();
+            getTitle(textarea);
+            saveTextareaScroll();
+            FontSize();
+            getSaveSetting();
+            textarea.scrollTop = parseInt(localStorage.getItem('novel-r-scroll'), 10);
+        });
+
+
+        function getSaveSetting() {
+            if(localStorage.getItem('novel-r-save') == "readonly") {
+                save();
+                
+            } else {
+                edit();
+            }
+        }
+
+        function getChapterContent() {
+            textarea.value = localStorage.getItem('novel-r-content');
+        }
+
+        function FontSize() {
+            if(localStorage.getItem('novel-r-font-size') !== null) {
+                var currentFS = localStorage.getItem('novel-r-font-size');
+                textarea.style.cssText = "font-size: "+currentFS+"px";
+            } else {
+                localStorage.setItem('novel-r-font-size', 10);
+                textarea.style.cssText = "font-size: 10px";
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>
