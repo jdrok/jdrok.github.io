@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>+EV</title>
+    <style>
+        body {
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #eee;
+        }
+        .container {
+            background-color: #151515;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 28rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        p {
+            font-size: 0.875rem;
+            color: #eee;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #eee;
+            margin-bottom: 0.5rem;
+        }
+        textarea, input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            background-color: #000;
+            color: #eee;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 5rem;
+        }
+        input[type="number"] {
+            appearance: textfield;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-clear {
+            background-color: rgb(121, 17, 17);
+            color: #eee;
+            margin-top: 0.5rem;
+        }
+        .btn-clear:hover {
+            background-color: #d1d5db;
+        }
+        .btn-calculate {
+            background-color: #2563eb;
+            color: #ffffff;
+            width: 100%;
+        }
+        .btn-calculate:hover {
+            background-color: #1d4ed8;
+        }
+        .btn-top {
+            background-color: #16a34a;
+            color: #ffffff;
+        }
+        .btn-top:hover {
+            background-color: #15803d;
+        }
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        .hidden {
+            display: none;
+        }
+        .results {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #333;
+            border-radius: 0.375rem;
+        }
+        .results h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .results h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .results table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .results table td {
+            border: 1px solid #d1d5db;
+            padding: 0.5rem;
+        }
+        .results table td:first-child {
+            font-weight: 500;
+        }
+        .text-red-600 {
+            color: red;
+        }
+        .text-green-600 {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        .error {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border-radius: 0.375rem;
+        }
+        .note {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #eee;
+        }
+        .btn-group {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .outcome-header {
+            text-align: center;
+            background-color: #222;
+        }
+        .form-group table tr td:nth-child(2) {
+            text-align: end;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Positive EV Calculator</h1>
+        <!--<p>
+            Enter decimal odds (Pinnacle for devigging, BingoPlus for betting) for 2-way (Home, Away) or 3-way (Home, Draw, Away) markets and your bankroll to calculate Expected Value (EV) and Kelly Criterion stakes.
+        </p>-->
+
+        <div class="form-group">
+            <label for="odds-input">Odds Input (JSON Format):</label>
+            <textarea
+                id="odds-input"
+                rows="4"
+                placeholder='{"odds": {"pinnacleOdds": [3.82, 2.204, 1.32], "bingoPlus": [3.96, 2.34, 1.33]}}'
+            ></textarea>
+            <button id="clear-btn" class="btn-clear">Clear</button>
+        </div>
+
+        <div class="form-group">
+            <label>De-vigging Method:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="devig-method" value="shin" />
+                    Shin Method
+                </label>
+                <label>
+                    <input type="radio" name="devig-method" value="power" checked />
+                    Power Method
+                </label>
+                <label>
+                    <input type="radio" name="devig-method" value="normalized" />
+                    Normalized Method
+                </label>
+            </div>
+            <div id="power-k-input" class="">
+                <label for="power-k">Power Method k-value (0.5–1.0):</label>
+                <input
+                    id="power-k"
+                    type="number"
+                    placeholder="0.95"
+                    min="0.5"
+                    max="1.0"
+                    step="0.01"
+                    value="0.95"
+                />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bankroll">Your Bankroll ($):</label>
+            <input
+                id="bankroll"
+                type="number"
+                placeholder="1000"
+                min="0"
+                step="0.01"
+                value="1000"
+            />
+        </div>
+
+        <button id="calculate-btn" class="btn-calculate">Calculate EV & Kelly</button>
+
+        <div id="results" class="results hidden">
+            <h2>Calculation Results:</h2>
+            <div id="results-content"></div>
+        </div>
+
+        <div id="error" class="error hidden"></div>
+
+        <div class="btn-group">
+            <button id="ok-btn" class="btn-top">Top</button>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide k-value input based on method selection
+        document.querySelectorAll('input[name="devig-method"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('power-k-input').classList.toggle('hidden', radio.value !== 'power');
+            });
+        });
+
+        // Clear button functionality
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            document.getElementById('odds-input').value = '';
+            //document.getElementById('bankroll').value = '';
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+        });
+
+        // OK button scrolls to top
+        document.getElementById('ok-btn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Calculate button functionality
+        document.getElementById('calculate-btn').addEventListener('click', () => {
+            const oddsInput = document.getElementById('odds-input').value;
+            const bankroll = parseFloat(document.getElementById('bankroll').value);
+            const method = document.querySelector('input[name="devig-method"]:checked').value;
+            const powerK = parseFloat(document.getElementById('power-k')?.value) || 0.95;
+            const resultsDiv = document.getElementById('results');
+            const resultsContent = document.getElementById('results-content');
+            const errorDiv = document.getElementById('error');
+
+            // Reset UI
+            resultsDiv.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+
+            // Validate inputs
+            if (!oddsInput || isNaN(bankroll) || bankroll <= 0) {
+                errorDiv.textContent = 'Please provide valid odds (JSON) and bankroll (> 0).';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            if (method === 'power' && (isNaN(powerK) || powerK < 0.5 || powerK > 1.0)) {
+                errorDiv.textContent = 'Power Method k-value must be between 0.5 and 1.0.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            let oddsData;
+            try {
+                oddsData = JSON.parse(oddsInput);
+                if (
+                    !oddsData.odds ||
+                    !Array.isArray(oddsData.odds.pinnacleOdds) ||
+                    !Array.isArray(oddsData.odds.bingoPlus) ||
+                    ![2, 3].includes(oddsData.odds.pinnacleOdds.length) ||
+                    oddsData.odds.pinnacleOdds.length !== oddsData.odds.bingoPlus.length
+                ) {
+                    throw new Error('Invalid odds format. Expected 2 or 3 outcome arrays.');
+                }
+            } catch (e) {
+                errorDiv.textContent = 'Invalid JSON format or odds structure: ' + e.message;
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            const pinnacleOdds = oddsData.odds.pinnacleOdds.map(Number);
+            const bingoPlusOdds = oddsData.odds.bingoPlus.map(Number);
+
+            // Validate odds
+            if (
+                pinnacleOdds.some(isNaN) ||
+                bingoPlusOdds.some(isNaN) ||
+                pinnacleOdds.some(o => o <= 1) ||
+                bingoPlusOdds.some(o => o <= 1)
+            ) {
+                errorDiv.textContent = 'Odds must be valid numbers greater than 1.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Define outcomes dynamically
+            const outcomeLabels = pinnacleOdds.length === 3 ? ['Home', 'Draw', 'Away'] : ['Home', 'Away'];
+            const outcomes = pinnacleOdds.map((pinnacleOdds, index) => ({
+                index,
+                pinnacleOdds,
+                bingoPlusOdds: bingoPlusOdds[index],
+                label: outcomeLabels[index]
+            }));
+
+            // Calculate implied probabilities from Pinnacle odds
+            const impliedProbs = pinnacleOdds.map(odds => 1 / odds);
+            const totalImplied = impliedProbs.reduce((sum, p) => sum + p, 0);
+            const vig = totalImplied - 1;
+
+            let trueProbs;
+            if (method === 'shin') {
+                // Shin Method: Distribute vig equally across outcomes
+                const vigPerOutcome = vig / outcomes.length;
+                trueProbs = impliedProbs.map(p => p - vigPerOutcome);
+            } else if (method === 'power') {
+                // Power Method with user-defined k
+                const poweredProbs = impliedProbs.map(p => Math.pow(p, powerK));
+                const totalPowered = poweredProbs.reduce((sum, p) => sum + p, 0);
+                trueProbs = poweredProbs.map(p => p / totalPowered);
+            } else {
+                // Normalized (Multiplicative) Method
+                trueProbs = impliedProbs.map(p => p / totalImplied);
+            }
+
+            // Validate true probabilities
+            if (trueProbs.some(p => p <= 0 || p >= 1)) {
+                errorDiv.textContent = 'Invalid devigged probabilities. Try a different method or k-value.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Calculate EV and Kelly for each outcome
+            const results = outcomes.map(({ index, pinnacleOdds, bingoPlusOdds, label }) => {
+                const trueProb = trueProbs[index];
+                const ev = (trueProb * bingoPlusOdds) - 1;
+                const kellyFraction = (trueProb * bingoPlusOdds - 1) / (bingoPlusOdds - 1);
+                const fullKelly = kellyFraction > 0 ? kellyFraction * bankroll : 0;
+                return {
+                    label,
+                    pinnacleOdds: pinnacleOdds.toFixed(2),
+                    bingoPlusOdds: bingoPlusOdds.toFixed(2),
+                    trueProb: (trueProb * 100).toFixed(3) + '%',
+                    ev: (ev * 100).toFixed(2) + '%',
+                    evValue: ev,
+                    fullKelly: fullKelly.toFixed(2),
+                    halfKelly: (fullKelly / 2).toFixed(2),
+                    quarterKelly: (fullKelly / 4).toFixed(2)
+                };
+            });
+
+            // Display results in separate tables
+            resultsContent.innerHTML = `
+                <p class="note"><strong>Devigged Probabilities (from Pinnacle, ${method === 'power' ? 'k=' + powerK : method}):</strong></p>
+                ${results.map(r => `
+                    <div class="form-group">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="outcome-header" style="color:${r.evValue < 0 ? '#eee' : '#00ff00'}">
+                                        <b>Outcome: ${r.label}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pinnacle Odds</td>
+                                    <td>${r.pinnacleOdds}</td>
+                                </tr>
+                                <tr>
+                                    <td>BingoPlus Odds</td>
+                                    <td><b>${r.bingoPlusOdds}</b></td>
+                                </tr>
+                                <tr>
+                                    <td>True Prob</td>
+                                    <td>${r.trueProb}</td>
+                                </tr>
+                                <tr>
+                                    <td>EV</td>
+                                    <td class="${r.evValue < 0 ? 'text-red-600' : 'text-green-600'}">${r.ev}</td>
+                                </tr>
+                                ${r.evValue > 0 ? `
+                                    <tr>
+                                        <td>Full Kelly</td>
+                                        <td>$${r.fullKelly}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Half Kelly</td>
+                                        <td>$${r.halfKelly}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quarter Kelly</td>
+                                        <td>$${r.quarterKelly}</td>
+                                    </tr>
+                                ` : ''}
+                            </tbody>
+                        </table>
+                    </div>
+                `).join('')}
+                <p class="note">
+                    * EV and Kelly stakes are calculated using BingoPlus odds against Pinnacle's devigged probabilities.
+                </p>
+            `;
+            resultsDiv.classList.remove('hidden');
+            window.scrollTo({ top: 540, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
