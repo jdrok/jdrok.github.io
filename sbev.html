@@ -185,8 +185,21 @@
             <textarea
                 id="odds-input"
                 rows="4"
+                placeholder='{"odds": {"pinnacleOdds": [3.82, 2.204, 1.32], "bingoPlus": [3.96, 2.34, 1.33]}}'
             ></textarea>
             <button id="clear-btn" class="btn-clear">Clear</button>
+        </div>
+
+        <div class="form-group">
+            <label for="bankroll">Your Bankroll ($):</label>
+            <input
+                id="bankroll"
+                type="number"
+                placeholder="1000"
+                min="0"
+                step="0.01"
+                value="1000"
+            />
         </div>
 
         <div class="form-group">
@@ -219,19 +232,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="bankroll">Your Bankroll ($):</label>
-            <input
-                id="bankroll"
-                type="number"
-                placeholder="1000"
-                min="0"
-                step="0.01"
-                value="1000"
-            />
-        </div>
-
-        <button id="calculate-btn" class="btn-calculate">Calculate EV & Kelly</button>
+        <button id="calculate-btn" class="btn-calculate" onclick="calculateEV()">Calculate EV & Kelly</button>
 
         <div id="results" class="results hidden">
             <h2>Calculation Results:</h2>
@@ -266,8 +267,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Calculate button functionality
-        document.getElementById('calculate-btn').addEventListener('click', () => {
+
+
+
+
+        // Calculate button functionality -----------------------------------------------------------------
+        function calculateEV() {
             const oddsInput = document.getElementById('odds-input').value;
             const bankroll = parseFloat(document.getElementById('bankroll').value);
             const method = document.querySelector('input[name="devig-method"]:checked').value;
@@ -312,6 +317,10 @@
 
             const pinnacleOdds = oddsData.odds.pinnacleOdds.map(Number);
             const bingoPlusOdds = oddsData.odds.bingoPlus.map(Number);
+
+            console.log(pinnacleOdds);
+            console.log(bingoPlusOdds);
+            
 
             // Validate odds
             if (
@@ -431,8 +440,8 @@
                 </p>
             `;
             resultsDiv.classList.remove('hidden');
-            window.scrollTo({ top: 540, behavior: 'smooth' });
-        });
+            window.scrollTo({ top: 320, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
