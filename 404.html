@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page Not Found</title>
+    <script type="text/javascript">
+        // Get the current path from the URL
+        var path = window.location.pathname;
+
+        // Define your base path for GitHub Pages
+        // This MUST match the 'basePath' in your router.js
+        var basePath = "/sports_betting_tracker"; 
+
+        // Redirect to the SPA's root with the intended path
+        // by using a hash (#). This makes the browser load index.html
+        // and then your router can read the hash.
+        if (path.startsWith(basePath)) {
+            var relativePath = path.substring(basePath.length);
+            // Ensure leading slash for consistency
+            if (relativePath.length === 0 || relativePath === '/') {
+                relativePath = '/';
+            }
+            window.location.replace(basePath + '/#' + relativePath);
+        } else {
+            // Fallback for unexpected paths, redirect to the project base
+            window.location.replace(basePath + '/');
+        }
+    </script>
+</head>
+<body>
+    <p>If you see this, you're being redirected...</p>
+</body>
+</html>
