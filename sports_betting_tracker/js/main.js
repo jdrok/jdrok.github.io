@@ -628,6 +628,50 @@
     }
 }
 
+async function importAll(elem) {
+    const fileInput = document.getElementById('import-all-json-file');
+    const file = fileInput.files[0];
+
+    if(!file) {
+      alert('Please select a JSON file first.');
+      return;
+    }
+
+    if(file.type !== 'application/json') {
+      alert('Invalid file. Expected file is JSON file.');
+      return;
+    }
+
+    elem.disabled = true;
+    
+    const reader = new FileReader();
+
+    reader.onload = async function(event) {
+        const fileContent = event.target.result;
+        //console.log('File Content:', fileContent);
+
+        try {
+            const jsonData = JSON.parse(fileContent);
+            
+            await importAllLocalForageData(jsonData, true);
+
+
+        } catch (e) {
+            alert('Error parsing JSON file. Please ensure it\'s a valid JSON format.');
+            console.error('JSON parsing error:', e);
+        }
+    };
+
+    reader.onerror = function(event) {
+        console.error('File reading error:', event.target.error);
+        alert('Error reading file. Please try again.');
+    };
+
+    reader.readAsText(file);
+    
+    elem.disabled = false;
+  }
+
 
   function formatTimeAgo(timestamp) {
     // Parse the input timestamp
@@ -686,3 +730,5 @@
     const diffDays = Math.floor(diffHours / 24);
     return `${diffDays}d${diffDays !== 1 ? '' : ''} ago`;
   }
+
+  
