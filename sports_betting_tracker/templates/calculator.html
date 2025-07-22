@@ -1,0 +1,58 @@
+
+
+    <div id="calculator">
+
+        <!--<div class="dflex-sb sub-nav">
+            <p class="sn-link">
+                <button class="sn-btn sn-link-selected">
+                    <i class="fa-solid fa-circle-check i-selected"></i>
+                    +EV
+                </button> 
+            </p>
+            <p class="sn-link">
+                <button class="sn-btn">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Arb
+                </button>                
+            </p>
+        </div>-->
+
+        <div class="dflex-sb bankrolls">
+            <div>
+                <p class="label ta-right">Starting Bankroll (₱)</p>
+                <input id="starting-bankroll" value="0.00" type="text" class="ta-right" disabled>
+            </div>
+            <div>
+                <p class="label ta-right">Current Bankroll (₱)</p>
+                <input id="current-bankroll" value="0.00" type="text" class="ta-right" disabled>
+            </div>
+        </div>
+
+        <div class="dflex-sb sb-odds">
+            <div>
+                <p class="label">Soft's Odds</p>
+                <div class="textbox-div">
+                    <textarea id="softbook-odds" rows="4" onblur="inputOdds(0)"></textarea>
+                </div>
+            </div>
+            <div class="odds-actions">
+                <div class="kc-type">
+                    <p class="label">Power k</p>
+                    <input type="text" class="ta-right" id="power-k" value="0.95">
+                </div>
+                <button class="red" onclick="clearOdds()">Clear</button>
+            </div>
+            <div>
+                <p class="label">Sharp's Odds</p>
+                <div class="textbox-div">
+                    <textarea id="sharpbook-odds" rows="4" onblur="inputOdds(1)"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="dflex-sb main-btn-div">            
+            <button class="blue main" id="calculate-ev-btn" onclick="calculateEV()">Calculate EV</button>
+        </div>
+
+        <div id="results"></div>
+        
+    </div>

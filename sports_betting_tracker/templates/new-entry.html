@@ -1,0 +1,257 @@
+
+
+    <div id="new-entry">
+
+        <div id="data-list">
+            <div class="dflex-sb modal-header">
+                <button class="blue" onclick="closeModal('data-list')"><i class="fa-solid fa-chevron-left"></i></button>
+                <h4>Add Data</h4>
+                <p>&nbsp;</p>
+            </div>
+            
+            <div class="modal-body-container">
+                <div>
+                    <br>
+                    <div class="dflex-sb">
+                        <input type="text" id="search-data-tb" onkeyup="searchBox(this)">
+                        <button class="blue" id="add-data-btn" onclick="addToLFC()" disabled><i class="fas fa-plus"></i></button>
+                        
+                    </div>
+                    <table id="data-table"></table>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="dflex-sb match-form">
+            <table class="teams-table">
+                <tr>
+                    <td colspan="2">
+                        <p class="label">Sport</p>
+                        <select id="sports-sb" onchange="sportsSBChanged(this)"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="label">League</p>
+                        <input type="text" id="league-tb" class="team-tb" onclick="addData('league')" readonly>
+                    </td>
+                    <td>
+                        <p class="label">&nbsp;</p>
+                        <button class="orange" id="add-league-btn" onclick="addData('league')"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="label team-home">Home Team Name</p>
+                        <input type="text" id="home-tb" class="team-tb" onclick="addData('home')" readonly>
+                    </td>
+                    <td>
+                        <p class="label">&nbsp;</p>
+                        <button class="orange" id="add-home-btn" onclick="addData('home')"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="label team-away">Away Team Name</p>
+                        <input type="text" id="away-tb" class="team-tb" onclick="addData('away')" readonly>
+                    </td>
+                    <td>
+                        <p class="label">&nbsp;</p>
+                        <button class="orange" id="add-away-btn" onclick="addData('away')"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="match-date-td">
+                        <p class="label">Match Date</p>
+                        <div>
+                            <input type="datetime-local" id="match-date-picker">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="dflex-sb" id="ne-books">
+            <div>
+                <p class="label">Softbook</p>
+                <select id="softbook-sb"></select>
+            </div>
+            <div>
+                <p class="label">Sharpbook</p>
+                <select id="sharpbook-sb"></select>
+            </div>
+        </div>
+        
+        <div class="dflex-sb bet-type">
+            <div>
+                <p class="label">Market Type</p>
+                <input type="text" id="market-type-tb" onclick="addData('market-type')" readonly>
+            </div>
+            <div class="mt-saver-div">
+                <p>&nbsp;</p>
+                <button class="orange" id="add-market-type-btn" onclick="addData('market-type')"><i class="fas fa-edit"></i></button>
+            </div>
+            <div>
+                <p class="label">Value</p>
+                <input type="text" class="ta-right" id="market-type-value-tb">
+            </div>
+        </div>
+
+        <div class="bet-form">
+            <div class="dflex-sa">
+                <p class="label">Odds</p>
+                <p class="label">Stake & Payouts</p>
+            </div>
+            <div class="dflex-sa">
+                <div class="bet-odds-container">
+                    <p class="label team-home">Home</p>
+                    <div>
+                        <input type="text" id="bet-home-odds">
+                        <button class="radio" onclick="selectRadio('bet-odds-container', this)"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                    <p class="label">Draw</p>
+                    <div>
+                        <input type="text" id="bet-draw-odds">
+                        <button class="radio" onclick="selectRadio('bet-odds-container', this)"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                    <p class="label team-away">Away</p>
+                    <div>
+                        <input type="text" id="bet-away-odds">
+                        <button class="radio" onclick="selectRadio('bet-odds-container', this)"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
+                <div class="stake-payouts-container">
+                    <p class="label">Stake (₱)</p>                
+                    <div class="dflex-sb">
+                        <button class="blue" onclick="roundOff(true)"><i class="fa-solid fa-arrow-down"></i></button>
+                        <input type="text" onblur="adjustStake(this.value)" id="bet-amount">
+                        <button class="blue" onclick="roundOff(false)"><i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                    <p class="label">Payout (₱)</p>                
+                    <input type="text" id="bet-payout" disabled>
+                    <p class="label">Payout (incl. bet) (₱)</p>
+                    <input type="text" id="bet-payout-2" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div id="order-date-div">
+            <p class="label">Order Date</p>
+            <div>
+                <div>
+                    <input type="datetime-local" id="order-date-picker">
+                </div>
+            </div>
+        </div>
+        
+        <div class="dflex-sb" id="bet-notes-div">            
+            <textarea rows="5" id="notes-ta"></textarea>
+        </div>
+
+        <div class="dflex-sb main-btn-div">            
+            <button class="blue main" onclick="saveBet()">Save</button>
+        </div>
+
+        <div class="modal-item-container ev-calc-result">
+            <div class="dflex-sb title won-bg">
+                <p class="label"></p>
+            </div>
+
+            <div class="dflex-sb item-info">
+                <p><span class="team-away">Soft</span> Sportsbook's Odds</p>
+                <p class="won">2.00</p>
+            </div>
+
+            <div class="dflex-sb item-info">
+                <p><span class="team-away">Soft</span>'s Implied Probability</p>
+                <p>50.00%</p>
+            </div>
+
+            <div class="dflex-sb item-info">
+                <p><span class="team-home">Sharp</span> Sportsbook's Odds</p>
+                <p>1.80</p>
+            </div>
+
+            <div class="dflex-sb item-info">
+                <p><span class="team-home">Sharp</span>'s Implied Probability</p>
+                <p>55.56%</p>
+            </div>
+
+            <div class="dflex-sb item-info no-bottom-border">
+                <div class="devig-container">
+                    <table class="sub-table">
+                        <tbody><tr>
+                            <td>
+                                <p class="label"></p>
+                            </td>
+                            <td>
+                                <p class="label">Shin</p>
+                            </td>
+                            <td>
+                                <p class="label">Power</p>
+                            </td>
+                            <td>
+                                <p class="label">Norm.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                True P.
+                            </td>
+                            <td>
+                                <p class="ta-right">55.051%</p>
+                            </td>
+                            <td>
+                                <p class="ta-right">54.752%</p>
+                            </td>
+                            <td>
+                                <p class="ta-right">55.000%</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>EV</p>
+                            </td>
+                            <td>
+                                <p class="ta-right won">+10.10%</p>
+                            </td>
+                            <td>
+                                <p class="ta-right won">+9.50%</p>
+                            </td>
+                            <td>
+                                <p class="ta-right won">+10.00%</p>
+                            </td>
+                        </tr>
+
+                        
+                            <tr>
+                                <td>
+                                    <p>Q.Kelly</p>
+                                </td>
+                                <td>
+                                    <p class="ta-right">₱ 25.25</p>
+                                </td>
+                                <td>
+                                    <p class="ta-right">₱ 23.76</p>
+                                </td>
+                                <td>
+                                    <p class="ta-right">₱ 25.00</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    Average Quarter Kelly
+                                </td>
+                                <td colspan="2">
+                                    <p class="ta-right">₱ 24.67</p>
+                                </td>
+                            </tr>
+
+                    </tbody></table>
+                </div>               
+            </div>
+        </div>
+        
+    </div>
