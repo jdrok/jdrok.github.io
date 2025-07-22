@@ -654,6 +654,8 @@ async function importAll(elem) {
             const jsonData = JSON.parse(fileContent);
             
             await importAllLocalForageData(jsonData, true);
+            const message = "Success: DB file has been uploaded."
+            messageBox(true, message);
 
 
         } catch (e) {
