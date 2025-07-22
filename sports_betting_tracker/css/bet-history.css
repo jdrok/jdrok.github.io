@@ -1,0 +1,199 @@
+
+
+
+    .detailed li {
+        border: 1px solid #777;
+        border-radius: 6px;
+        padding: var(--padding);
+        margin: 8px 0;
+        background-color: #2a2a2a;
+        box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+    }
+    .detailed li div.item-header {
+        padding: 6px;
+        display: flex;
+    }
+    .detailed li div.item-header {
+        justify-content: space-between;
+        background-color: var(--list-bg-color);
+        border-radius: 6px;
+    }
+    .detailed li div.item-header p {
+        width: 33%;
+    }
+    .detailed li .item-number {
+        width: 70px;
+    }
+    .peso {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .matchup {
+        padding: 2px 0;
+        font-size: 14px;
+    }
+    .league-match-date {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+    }
+    .league {
+        font-weight: bold;
+        width: 70%;
+    }
+    .sportsbook {
+        display: flex;
+        justify-content: space-between;
+        margin: 6px 0;
+        font-size: 12px;
+    }
+    .label {
+        font-size: 12px;
+        color: #9f9f9f;
+        font-variant: all-petite-caps;
+    }
+    .item-body {
+        padding: 6px;
+        margin: 6px 0;
+        border: 1px solid var(--list-bg-color);
+        border-radius: 6px;
+    }
+    .odds-payouts {
+        border-top: 1px dashed var(--list-bg-color);
+        padding-top: 2px;
+        margin-top: 2px;
+    }
+    .odds-payouts table {
+        width: 100%;
+    }
+    /*.odds-payouts table tr:first-child td:first-child,
+    .odds-payouts table tr:first-child td:last-child,
+    .tr-1-td-2 {
+        padding-bottom: 4px;
+    }
+    .odds-payouts .tr-1-td-1 {
+        width: 36%;
+    }
+    .stake, .payout,
+    .odds-payouts table tr:first-child td:last-child .label,
+    .odds-payouts table tr:last-child td:last-child .label {
+        text-align: end;
+    }
+    .odds, .stake, .payout, .picked-team, .positive-ev {
+        font-weight: bold;
+    }
+    .tr-1-td-2, .tr-2-td-2 {
+        text-align: end;
+        width: 18%;
+    }*/
+    .tr-2-td-1 {
+        width: 70%;
+    }
+    .ev-table td {
+        width: 33.33%;
+        background-color: #252525;
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+    .order-date {
+        text-align: center;
+    }
+    .item-header p:nth-child(2),
+    .item-header p:nth-child(3) {
+        font-weight: bold;
+    }
+    .matchup .team-home,
+    .matchup .team-away {
+        font-weight: 500;
+    }
+    .item-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+    #bets-view-div {
+        display: flex;
+        padding: var(--padding);
+    }
+
+
+
+
+    #bet-info {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9;
+        position: fixed;
+        background-color: var(--bg);
+        display: none;
+        text-align: center;
+    }
+    #bet-info-view,
+    #bet-info-edit {
+        display: none;
+    }
+    .modal-header {        
+        padding: var(--padding);
+        border-bottom: 2px solid #1274d1;
+        background-color: var(--bg);
+        position: relative;
+        z-index: 99;
+    }
+    .modal-title-container {
+        margin-left: -26px;
+    }
+    .modal-title-container .title {        
+        font-weight: bold;
+    }
+    
+    .modal-body-container {
+        overflow-y: auto;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 50px;
+        padding: 0 var(--padding) 50px var(--padding);
+    }
+    .modal-body-container input {
+        width: 85%;
+    }
+    .modal-item-container {
+        border: 1px solid var(--list-bg-color);
+        margin-top: 16px;
+        border-radius: 4px;
+    }
+    .modal-item-container .title {
+        font-variant: all-petite-caps;
+        padding: 8px;
+        background-color: var(--list-bg-color);
+    }
+    .modal-item-container .item-info {
+        font-size: 14px;
+        padding: 6px;
+    }
+    .item-info {
+        border-bottom: 1px dashed var(--list-bg-color);
+    }
+    .no-bottom-border {
+        border-bottom: 0;
+    }
+    .modal-title-container .label {
+        line-height: 0.6;
+    }
+
+    #bet-info-edit table {
+        width: 100%;
+        text-align: left;
+    }
+    #bet-info-edit table td div {
+        display: flex;
+    }
+    #bet-info-edit table input,
+    #bet-info-edit table select {
+        width: 100%;
+    }

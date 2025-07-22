@@ -1,0 +1,200 @@
+
+
+    .select-search {
+        width: 70%;
+        background-color: #aaa;
+        padding: 1px 0 0 2px;
+        border-radius: 4px;
+        position: absolute;
+        padding-bottom: 0.5px;
+    }
+    .select-search .textbox-div {
+        padding-bottom: 1px;
+    }
+    .select-search input[type=text] {
+        width: 101% !important;
+        border: 0;
+    }
+    .select-search select {
+        width: 101% !important;
+        border: 0;
+    }
+    .select-search ul {
+        width: 100%;
+        display: none;
+    }
+    .select-search ul li {
+        list-style: none;
+        padding: 8px;
+        margin-left: -2px;
+        text-align: left;
+        background-color: #555;
+        border-left: 1px solid #aaa;
+        border-right: 1px solid #aaa;
+    }
+    .select-search ul li:nth-child(even) {
+        background-color: #444;
+    }
+    .select-search ul li:last-child {
+        border-radius: 0 0 4px 4px;
+    }
+    #new-entry .teams-table {
+        width: 100%;
+    }
+    .teams-table td {
+        vertical-align: top;
+    }
+    .teams-table button {
+        padding: 8px;
+    }
+    .teams-table tr:first-child td:first-child {
+        width: 75%;
+    }
+    .match-date-td div{
+        width: 100%;
+        display: flex;
+    }
+    .teams-table tr td:last-child {
+        text-align: end;
+    }
+    #new-entry .label {
+        font-size: 14px;
+        text-align: left;
+    }
+    .match-form, 
+    .bet-form, 
+    .calc-info,
+    .bet-type {
+        padding: var(--padding);
+        border: 1px solid #666;
+        margin: var(--padding);
+        border-radius: 4px;
+    }
+    .bet-type {
+        padding: 0;
+        border: 0;
+    }
+    .bet-form div:first-child select {
+        width: 80px;
+    }
+    .bet-form .label {
+        text-align: center !important;
+    }
+    .bet-form input {
+        text-align: right !important;
+    }
+    #new-entry .modal-item-container {
+        margin: var(--padding);
+    }
+    #new-entry .main-btn-div {
+        padding: var(--padding);
+    }
+
+    .bet-odds-container,
+    .stake-payouts-container {
+        border: 1px solid #666;
+        padding: var(--padding) 0;
+        border-radius: 4px;
+    }
+    .bet-odds-container {        
+        width: 35%;
+    }
+    .stake-payouts-container {        
+        width: 55%;
+    }
+    .bet-odds-container div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 var(--padding);
+    }
+    .bet-odds-container input {
+        width: 40px;
+    }
+    .stake-payouts-container input {
+        width: 158px;
+    }
+    .stake-payouts-container .dflex-sb input {
+        font-size: 20px;
+    }
+    .stake-payouts-container:nth-child(2) {
+        padding: var(--padding);
+    }
+    #bet-amount {
+        width: 90px;
+    }
+    .match-form, .bet-form:nth-child(2) {
+        padding: 0;
+        border: 0;
+        text-align: center;
+    }
+    .bet-form .dflex-sa:first-child .label {
+        font-weight: bold;
+    }
+    .bet-type div:first-child {
+        width: 197px;
+    }
+    .mt-saver-div {
+        margin-left: 20px;
+    }
+    .bet-type .select-search {
+        width: 60% !important;
+    }
+    
+    .bet-type div:last-child {
+        width: 20%;
+    }
+    .bet-type div:last-child input {
+        width: 66%;
+    }
+    .ev-calc-result .label {
+        color: #fff;
+    }
+    .team-tb {
+        width: 98% !important;
+    }
+    #bet-notes-div,
+    #ne-books {
+        padding: 0 var(--padding);
+    }
+    #ne-books div {
+        width: 50%;
+    }
+    #ne-books div select {
+        width: 98%;
+    }
+    #order-date-div {
+        padding: var(--padding);
+    } 
+    #order-date-div div {
+        display: flex;
+        width: 100%;
+    }
+
+
+
+
+    #data-list {
+        position: fixed;
+        display: none;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #252525;
+    }
+    #data-list table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 1px solid #444;
+    }
+    #data-table th,
+    #data-table td {
+        border: 1px solid #444;
+        padding: 8px;
+    }
+    #data-table td:last-child {
+        width: 30px;
+    }

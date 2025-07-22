@@ -1,0 +1,79 @@
+
+
+    
+    #calculator {
+        padding: var(--padding);   
+    }
+    .sn-link .blue {
+        padding: 7px;
+    }
+    .calc-form {
+        padding: 10px 0;
+        height: auto;
+    }
+    .sb-odds .label {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    
+    #calculator textarea {
+        font-size: 20px;
+    }
+    .odds-actions {
+        text-align: center;
+    }
+    .odds-actions button:first-child {
+        position: relative;
+        top: 14px;
+    }
+    .no-bet {
+        display: none;
+    }
+    .kc-type {
+        width: 90px;
+        margin: 22px 10px;
+    }
+    .kc-type .label {
+        font-size: 14px;
+        font-weight: normal;
+        margin-top: 0;
+    }
+    .devig-container {
+        width: 100%;
+    }
+    .sub-table {
+        width: 100%;
+        border: 1px dashed #000;
+        border-collapse: collapse;
+        margin-top: var(--padding);
+    }
+    .sub-table td {
+        border: 1px solid #000;
+        padding: 6px;
+    }
+    .sub-table tr:first-child td {
+        background-color: #181818;
+    }
+    .sub-table .label {
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .sub-table tr:first-child td:nth-child(1) {
+        width: 20%;
+    }
+    .sub-table tr:first-child td:nth-child(2),
+    .sub-table tr:first-child td:nth-child(3),
+    .sub-table tr:first-child td:nth-child(4) {
+        width: 26%;
+    }
+    #calculator .bankrolls div:last-child {
+        text-align: end;
+    }
+    #calculator .bankrolls input {
+        width: 80%;
+    }
+    #power-k {
+        width: 50%;
+    }
