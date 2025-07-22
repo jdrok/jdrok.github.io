@@ -11,8 +11,8 @@
     });
 
     
-    const basePath = "/sports_betting_tracker";
-    const path = 'sports_betting_tracker/';
+    const basePath = "";
+    const path = '';
 
     //Create the Routes
     const routes = {
