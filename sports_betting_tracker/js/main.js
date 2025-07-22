@@ -319,7 +319,7 @@
 
 
 
-  /* -------------------- HTTP Requests -------------------- */
+  /* -------------------- HTTP Requests --------------------  */
 
   function getDefaultData(callback) {
     const dataURL = "/sports_betting_tracker/data/data.json";
