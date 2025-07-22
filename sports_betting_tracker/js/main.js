@@ -322,7 +322,7 @@
   /* -------------------- HTTP Requests -------------------- */
 
   function getDefaultData(callback) {
-    const dataURL = "http://192.168.1.9/tester/sports_betting/sports_betting_tracker/data/data.json";
+    const dataURL = "/sports_betting_tracker/data/data.json";
 
     fetch(dataURL)
         .then(res => {
