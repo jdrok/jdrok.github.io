@@ -1,0 +1,317 @@
+{
+    "defaults": {
+        "startingBankroll": 5000.00,
+        "currentBankroll": 5000.00,
+        "powerK": 0.95,
+        "oddsSeparator": ","
+    },
+    "sports": [
+        "Basketball",
+        "Football",
+        "Tennis",
+        "Baseball",
+        "Volleyball",
+        "Boxing",
+        "MMA",
+        "Esports",
+        "Table Tennis"
+    ],
+    "sportsbooks": [
+        "Pinnacle",
+        "BingoPlus",
+        "ArenaPlus",
+        "Bet88",
+        "BK8",
+        "SportsPlus"
+    ],
+    "marketTypes": [
+        {
+            "basketball": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+
+                "Handicap - Home",
+                "Handicap - Away",
+
+                "Total Points Over",
+                "Total Points Under",
+
+                "1st Quarter Moneyline - Home",
+                "1st Quarter Moneyline - Away",
+
+                "2nd Quarter Moneyline - Home",
+                "2nd Quarter Moneyline - Away",
+
+                "3rd Quarter Moneyline - Home",
+                "3rd Quarter Moneyline - Away",
+                
+                "4th Quarter Moneyline - Home",
+                "4th Quarter Moneyline - Away",
+
+                "1st Half Moneyline - Home",
+                "1st Half Moneyline - Away"
+            ],
+            "football": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+                "Moneyline - Draw",
+
+                "Handicap - Home",
+                "Handicap - Away",
+
+                "Total Goals Over",
+                "Total Goals Under"
+            ],
+            "tennis": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+
+                "Handicap - Home",
+                "Handicap - Away",
+
+                "Total Sets Over",
+                "Total Sets Under"
+            ],
+            "baseball": [
+                "Moneyline - Home",
+                "Moneyline - Away"
+            ],
+            "volleyball": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+
+                "Handicap - Home",
+                "Handicap - Away",
+
+                "Total Sets Over",
+                "Total Sets Under",
+
+                "1st Set Moneyline - Home",
+                "1st Set Moneyline - Away",
+                
+                "1st Set Handicap - Home",
+                "1st Set Handicap - Away",
+
+                "1st Set Total Points Over",
+                "1st Set Total Points Under",
+
+                "2nd Set Moneyline - Home",
+                "2nd Set Moneyline - Away",
+                
+                "2nd Set Handicap - Home",
+                "2nd Set Handicap - Away",
+
+                "2nd Set Total Points Over",
+                "2nd Set Total Points Under"
+            ],
+            "boxing": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+
+                "Total Rounds Over",
+                "Total Rounds Under"
+            ],
+            "mma": [
+                "Moneyline - Home",
+                "Moneyline - Away"
+            ],
+            "esports": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+
+                "Handicap - Home",
+                "Handicap - Away",
+
+                "Total Games Over",
+                "Total Games Under",
+
+                "Map 1 Moneyline - Home",
+                "Map 1 Moneyline - Away",
+                
+                "Map 2 Moneyline - Home",
+                "Map 2 Moneyline - Away",
+
+                "Map 3 Moneyline - Home",
+                "Map 3 Moneyline - Away"
+            ],
+            "table_tennis": [
+                "Moneyline - Home",
+                "Moneyline - Away",
+
+                "Handicap - Home",
+                "Handicap - Away",
+
+                "Total Sets Over",
+                "Total Sets Under",
+
+                "Set 1 Moneyline - Home",
+                "Set 1 Moneyline - Away",
+                
+                "Set 2 Moneyline - Home",
+                "Set 2 Moneyline - Away",
+                
+                "Set 3 Moneyline - Home",
+                "Set 3 Moneyline - Away"
+            ]
+        }
+    ],
+    "leagues": [
+        {
+            "basketball": [
+                "Argentina LNB",
+                "Australia Big V",
+                "Australia NBL1",
+                "Australia NBL1 Women",
+                "Brazil LBF Women",
+                "FIBA Asia Cup Women",
+                "International Friendlies",
+                "NBA",
+                "NBA Summer League",
+                "PBA",
+                "Singapore NBL Division 1",
+                "WNBA",
+                "William Jones Cup"
+            ],
+            "football": [
+                "Argentina Liga Pro",
+                "Argentina Liga Pro Reserves",
+                "Australia Football Queensland Premier League 1",
+                "Australia Football Queensland Women Premier League 1",
+                "Australia New South Wales Premier League",
+                "Australia Northern Territory Premier League",
+                "Australia Victoria National Premier League",
+                "Australia Victoria Premier League 1",
+                "Australia Victoria Premier League 2",
+                "Brazil Serie A",
+                "Brazil Serie B",
+                "Chile Primera Division",
+                "China Football Super League",
+                "Club Friendlies",
+                "Colombia Primera A",
+                "Czech Republic National Football League",
+                "Denmark 1st Division",
+                "Denmark Super League",
+                "Ecuador Serie A",
+                "Finland Kakkonen",
+                "Finland Veikkausliiga",
+                "Finland Ykkonen",
+                "Finland Ykkosliiga",
+                "Iceland 1st Division",
+                "Iceland Premier League",
+                "Ireland Fai Cup",
+                "Japan J-League Division 1",
+                "Japan Football League",
+                "Kazakhstan Premier League",
+                "Korea K League 1",
+                "Latvia Virsliga",
+                "Mexico Primera Division",
+                "New Zealand Central League",
+                "New Zealand Southern League",
+                "Paraguay Primera Division",
+                "Poland 1st Division",
+                "Poland Ekstraklasa",
+                "Russia Premier League",
+                "Scotland League Cup",
+                "South Australia National Premier League",
+                "Sweden Allsvenskan",
+                "Sweden Superettan",
+                "Venezuela Primera Division",
+                "Western Australia National Premier League"
+            ],
+            "tennis": [
+                "ATP - Challenger Granby",
+                "ATP - Challenger San Marino",
+                "ATP - Challenger San Marino Doubles",
+                "ATP - Swiss Open Gstaad",
+                "ATP - Swiss Open Gstaad Doubles",
+                "ITF - Casablanca Women Doubles",
+                "ITF - Casablanca Women Singles",
+                "ITF - Castelo Branco Men Doubles",
+                "ITF - Castelo Branco Men Singles",
+                "ITF - Darmstadt Women Doubles",
+                "ITF - Darmstadt Women Singles",
+                "ITF - Gubbio Men Doubles",
+                "ITF - Gubbio Men Singles",
+                "ITF - HillCrest Men Singles",
+                "ITF - Huamantla Women Singles",
+                "ITF - Kramsach Men Doubles",
+                "ITF - Kramsach Men Singles",
+                "ITF - Krsko Women Doubles",
+                "ITF - Krsko Women Singles",
+                "ITF - Kursumlijska Banja Men Doubles",
+                "ITF - Kursumlijska Banja Men Singles",
+                "ITF - Louisville Kentucky Men Singles",
+                "ITF - Monastir Men Doubles",
+                "ITF - Monastir Men Singles",
+                "ITF - Monastir Women Doubles",
+                "ITF - Nakhon Pathom Men Singles",
+                "ITF - Nova Gorica Men Doubles",
+                "ITF - Nova Gorica Men Singles",
+                "ITF - Nottingham Women Doubles",
+                "ITF - Nottingham Women Singles",
+                "ITF - Olomouc Women Doubles",
+                "ITF - Olomouc Women Singles",
+                "ITF - Poprad Men Doubles",
+                "ITF - Santa Tecla Men Singles",
+                "ITF - Sao Paulo Women Singles",
+                "ITF - Slobozia Men Singles",
+                "ITF - Torino Women Doubles",
+                "ITF - Torino Women Singles",
+                "ITF - Uriage Men Doubles",
+                "ITF - Uriage Men Singles",
+                "ITF - Uslar Men Doubles",
+                "ITF - Uslar Men Singles",
+                "ITF - Vitoria-Gasteiz Women Doubles",
+                "ITF - Vitoria-Gasteiz Women Singles",
+                "WTA - Hamburg Open",
+                "WTA - Iasi Open",
+                "WTA - Iasi Open Doubles",
+                "WTA - Porto Open",
+                "WTA - Porto Open Doubles"
+            ],
+            "baseball": [
+                "Nippon Professional Baseball",
+                "Korea - KBO League",
+                "MLB",
+                "Mexican League"
+            ],
+            "volleyball": [
+                "Asia SEA V.League",
+                "World Pro League",
+                "World FIVB Nations League",
+                "Philippines PVL Women",
+                "Argentina Division de Honor",
+                "Gambia National League Women"
+            ],
+            "boxing": [
+                "Professional Boxing"
+            ],
+            "mma": [
+                "PFL",
+                "UFC",
+                "ONE"
+            ],
+            "esports": [
+                "CS2 - FISSURE Playground",
+                "Dota 2 - Esports World Cup",
+                "League of Legends - Arabian League",
+                "League of Legends- Asia Masters",
+                "League of Legends - Esports World Cup",
+                "League of Legends - LIT",
+                "League of Legends - NACL",
+                "League of Legends - LJL",
+                "League of Legends - PLP",
+                "League of Legends - NLC",
+                "League of Legends - ROL",
+                "League of Legends - TCL",
+                "Valorant - VCT EMEA",
+                "Valorant - VCT Americas",
+                "Valorant - VCT China",
+                "Valorant - VCT Pacifics"
+            ],
+            "table_tennis": [
+                "Czech Liga Pro Men"
+            ]
+        }
+    ]
+}
