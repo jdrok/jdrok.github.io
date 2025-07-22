@@ -327,7 +327,6 @@
                                 </td>
                             </tr>
 
-                            ${parseFloat(outcome.methodData[0].evValue) > 0 || parseFloat(outcome.methodData[1].evValue) > 0 || parseFloat(outcome.methodData[2].evValue) > 0 ? `
                                 <tr>
                                     <td>
                                         <p>Q.Kelly</p>
@@ -368,8 +367,7 @@
                                     <td colspan="4" class="ta-right">
                                         <button class="blue add-bet" onclick="addBet('${(outcome.label).toLowerCase()}', 'average')">Bet</button>
                                     </td>
-                                </tr>` 
-                            : ''}
+                                </tr>
 
                         </table>
                     </div>               
