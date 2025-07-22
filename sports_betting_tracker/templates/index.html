@@ -1,0 +1,269 @@
+
+
+
+    <div id="bet-info">
+       <div class="dflex-sb modal-header">
+            <button class="blue" onclick="closeModal('bet-info')"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="modal-title-container">
+                <p class="title" id="bet-number-title">1 312 412</p>
+                <p class="label">Bet Number</p>
+            </div>
+            <button class="orange"><i class="fas fa-edit"></i></button>
+       </div>
+
+       <div class="modal-body-container" id="bet-info-edit">
+            <table>
+                <tr>
+                    <td>
+                        <p class="label">Status</p>
+                        <div>
+                            <select id="bet-status-sb">
+                                <option value="running">Running</option>
+                                <option value="won">Won</option>
+                                <option value="lose">Lose</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="label">Closing Odds</p>
+                        <div>
+                            <input type="text" class="ta-right" id="bet-closing-odds-tb">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <div class="dflex-sb main-btn-div" id="update-bet-btn-div"></div>
+                    </td>
+                </tr>
+            </table>
+
+       </div>
+       <div class="modal-body-container" id="bet-info-view">
+            <div class="modal-item-container">
+                <p class="title">Bet Inforamtion</p>
+
+                <div class="dflex-sb item-info">
+                    <p>Status</p>
+                    <p class="won">Won</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Team</p>
+                    <p class="team-home">Miami Heat</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Odds</p>
+                    <p>2.66</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Stake</p>
+                    <p>
+                        <span class="peso">₱ </span>
+                        100.00
+                    </p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Payout</p>
+                    <p class="won">
+                        <span class="peso">₱ </span>
+                        100.00
+                    </p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Payout (incl. bet)</p>
+                    <p>
+                        <span class="peso">₱ </span>
+                        100.00
+                    </p>
+                </div>
+
+                <div class="dflex-sb item-info no-bottom-border">
+                    <p>Time</p>
+                    <p>July 13, 2025 22:30</p>
+                </div>
+            </div>
+
+            <div class="modal-item-container">
+                <p class="title">Stake Inforamtion</p>
+
+                <div class="dflex-sb item-info">
+                    <p>Type</p>
+                    <p>+EV</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>EV / Edge</p>
+                    <p>
+                        <span class="won">0.1556</span> / <span class="won">15.56%</span>
+                    </p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Kelly Criterion</p>
+                    <p>Quarter Kelly</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>BingoPlus's Odds</p>
+                    <p>3.56</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>Pinancle's Odds</p>
+                    <p>2.56</p>
+                </div>
+
+                <div class="dflex-sb item-info no-bottom-border">
+                    <p><span class="team-home">Home</span>'s True Chance of Winning</p>
+                    <p>46%</p>
+                </div>
+            </div>
+
+            <div class="modal-item-container">
+                <p class="title">Match Inforamtion</p>
+
+                <div class="dflex-sb item-info team-home">
+                    <p>Home</p>
+                    <p>Miami Heat (2.66)</p>
+                </div>
+
+                <div class="dflex-sb item-info team-away">
+                    <p>Away </p>
+                    <p>Chicago Bulls (1.55)</p>
+                </div>
+
+                <div class="dflex-sb item-info">
+                    <p>League</p>
+                    <p>New Zealand NBL</p>
+                </div>
+
+                <div class="dflex-sb item-info no-bottom-border">
+                    <p>Date</p>
+                    <p>July 13, 2025 22:30</p>
+                </div>
+            </div>
+       </div>
+    </div>
+
+    <div id="bet-history">
+        <divt id="bets-view-div">
+            <select id="bets-view-sb" onchange="changeBetsView(this.value)">
+                <option value="all">All Bets</option>
+                <option value="running">Running Bets</option>
+                <option value="won">Won Bets</option>
+                <option value="lose">Lose Bets</option>
+                <option value="rejected">Rejected Bets</option>
+            </select>
+        </div>
+        <div class="list-container">
+            <ul class="detailed" id="bets-ul">
+                <li>
+                    <div class="item-header">
+                        <p class="ta-left">
+                            <span class="number">#333339</span>
+                        </p>
+                        <p class="running ta-center">Click Sync Button</p>
+                        <p class="running ta-right">
+                            <span class="peso">₱ </span>
+                            Click Sync Button
+                        </p>
+                    </div>
+                    <div class="item-body">
+                        <div class="league-match-date">
+                            <p class="league"Click Sync Button</p>
+                        </div>
+                        <p class="matchup">
+                            <span class="team-home">Click Sync Button</span> vs <span class="team-away">Click Sync Button</span>
+                        </p>
+                        <div class="odds-payouts">
+                            <table>
+                                <tr>
+                                    <td colspan="2">
+                                        <p class="label">Pick</p>
+                                        <div class="sportsbook-name">
+                                            <p>Click Sync Button</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tr-2-td-1">
+                                        <p class="label">Sportsbook</p>
+                                        <div class="sportsbook-name">
+                                            <p>Click Sync Button</p>
+                                        </div>
+                                    </td>
+                                    <td class="ta-right">
+                                        <p class="label">Odds</p>
+                                        <p class="odds">8.8</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ta-right">
+                                        <p class="label ta-center">Expected Value (S/P/N) (%)</p>
+                                        <div class="positive-ev">
+                                            <table class="ev-table">
+                                                <tr>
+                                                    <td>
+                                                        <p class="lose">Click Sync Button</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="won">Click Sync Button</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="won">Click Sync Button</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td class="ta-right">
+                                        <p class="label">Stake</p>
+                                        <p class="stake">
+                                            <span class="peso">₱ </span>
+                                            Click Sync Button
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p class="label">Order Date</p>
+                                        <p class="payout">
+                                            Click Sync Button
+                                        </p>
+                                    </td>
+                                    <td class="ta-right">
+                                        <p class="label">Payout</p>
+                                        <p class="payout">
+                                            <span class="peso">₱ </span>
+                                            Click Sync Button
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="blue" onclick="getBetInfo()"><i class="fa-solid fa-circle-info"></i></button>
+
+                        <div class="order-date">
+                            <p class="label">Settlement Date</p>
+                            <p>Click Sync Button</p>
+                        </div>
+
+                        <button class="orange"><i class="fas fa-edit"></i></button>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
