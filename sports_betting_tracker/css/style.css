@@ -1,0 +1,251 @@
+
+    
+    :root {
+        --bg: #252525;
+        --padding: 10px;
+        --list-bg-color: #555;
+        --won: #00ff00;
+        --running: #f3a822;
+        --lose: #ff6d6d;
+        --rejected: #aaa;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    html, body {
+        font-family: 'Open Sans', sans-serif;
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--bg);
+        color: #eee;
+    }
+    a {
+        text-decoration: none;
+    }
+    .link-button {
+        display: flex;
+        width: 30px;
+        height: 30px;
+        border: 0;
+        border-radius: 4px;
+        color: #eee;
+        font-size: 16px;
+        font-variant: all-small-caps;
+        justify-content: center; /* Horizontally center content */
+        align-items: center;
+        background-color: #1274d1;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--padding);
+    }
+    .bankroll {
+        text-align: right;
+        font-size: 20px;
+    }
+    .tab-btn {
+        padding: 6px 6px 8px 6px;
+        border: 1px solid #aaa;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        color: #ddd;
+        font-variant: all-petite-caps;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .nav-links-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #content {
+        position: fixed;
+        bottom: 0;
+        top: 77px;
+        background-color: #252525;
+        border-top: 2px solid #1274d1;
+        overflow-y: auto;
+        width: 100%;
+        padding-bottom: 100px;
+    }
+    .current-tab-btn {
+        background-color: #1274d1;
+        border: 0;
+    }
+    .actions-container {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--padding);
+        padding-bottom: 0;
+    }
+    ul li {
+        list-style: none;
+    }
+    button {
+        padding: 4px 8px;
+        border: 0;
+        border-radius: 4px;
+        color: #eee;
+        font-size: 16px;
+        font-variant: all-small-caps;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    }
+    button:disabled,
+    button[disabled] {
+        border: 1px solid #666;
+        background-color: #252525 !important;
+        color: #666;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    button:active {
+        background-color: #004085; /* Even darker blue when clicked */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Smaller shadow when active */
+        transform: translateY(1px); /* Slight press effect */
+    }
+    button.red, a.red {
+        background-color: #d31616;
+    }
+    button.blue {
+        background-color: #1274d1;
+    }
+    button.green {
+        background-color: #009300;
+    }
+    button.gray {
+        background-color: gray;
+    }
+    button.orange, a.orange {
+        background-color: #936004;
+    }
+    button.radio {
+        background-color: #333;
+        color: #333;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2) inset;
+        border: 1px solid #444;
+        transform: none;
+    }
+    button.radio-selected {
+        border: 2px solid #00ff00;
+        color: #00ff00;
+    }
+    .won {
+        color: var(--won);
+    }
+    .running {
+        color: var(--running);
+    }
+    .lose {
+        color: var(--lose);
+    }
+    .rejected {
+        color: var(--rejected);
+    }
+    .list-container {
+        padding: 0 var(--padding);
+        font-size: 14px;
+    }    
+    .ta-left {
+        text-align: left !important;
+    }
+    .ta-center {
+        text-align: center !important;
+    }
+    .ta-right {
+        text-align: right !important;
+    }
+    .dflex-sb {
+        display: flex;
+        justify-content: space-between;
+    }
+    .dflex-sa {
+        display: flex;
+        justify-content: space-around;
+    }
+    .sub-nav {
+        margin-bottom: var(--padding);
+    }
+    .sub-nav .sn-link {
+        width: 100%;
+        text-align: center;
+    }
+    .sn-btn {
+        padding: 6px 26px;
+        border: 0;
+        border-radius: 4px;
+        font-size: 16px;
+        font-variant: all-small-caps;
+        justify-content: center; /* Horizontally center content */
+        align-items: center;
+        background-color: transparent;
+        border: 1px solid var(--list-bg-color);
+    }
+    .sn-link-selected {        
+        border: 2px solid #1274d1;
+    }
+    .sn-btn i {
+        display: none;
+        position: absolute;
+        margin-left: -20px;
+        margin-top: 1px;
+        color: var(--won);
+    }
+    .i-selected {
+        display: inline !important;
+    }
+    input[type=text], textarea, select, input[type=datetime-local] {
+        background-color: var(--bg);
+        border: 1px solid #fff;
+        padding: 8px;
+        color: #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
+    input[type=text]:disabled, textarea:disabled, select:disabled,
+    input[type=text][disabled], textarea[disabled], select[disabled] {        
+        border: 1px solid #555;
+    }
+    .textbox-div {
+        padding-right: calc(var(--padding) * 2);
+    }
+    .main-btn-div {
+        margin: 4px 0;
+    }
+    .main-btn-div button.main {
+        width: 100%;
+        padding: 12px 0;
+    }
+    .won-bg {
+        background-color: #1d911d !important;
+    }
+    
+    .team-home {
+        color: #72b5ff !important;
+    }
+    .team-away {
+        color: #ff8181 !important;
+    }
+    #message {
+        position: fixed;
+        top: var(--padding);
+        width: 100%;
+        display: none;
+        justify-content: center;
+    }
+    #message div {
+        background-color: #bc2f2f;
+        width: 90%;
+        color: #ffffff;
+        padding: var(--padding);
+        border-radius: 4px;
+        display: flex;
+    }
+    #message div i {
+        width: 36px;
+        align-self: anchor-center;
+    }
+    #last-sync-i {
+        font-size: 14px;
+    }
