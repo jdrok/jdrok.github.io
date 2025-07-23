@@ -49,7 +49,10 @@
                 "4th Quarter Moneyline - Away",
 
                 "1st Half Moneyline - Home",
-                "1st Half Moneyline - Away"
+                "1st Half Moneyline - Away",
+
+                "Total Points Over",
+                "Total Points Under"
             ],
             "football": [
                 "Moneyline - Home",
@@ -60,7 +63,10 @@
                 "Handicap - Away",
 
                 "Total Goals Over",
-                "Total Goals Under"
+                "Total Goals Under",
+
+                "Total Goals Odd",
+                "Total Goals Even"
             ],
             "tennis": [
                 "Moneyline - Home",
@@ -294,16 +300,16 @@
             "esports": [
                 "CS2 - FISSURE Playground",
                 "Dota 2 - Esports World Cup",
-                "League of Legends - Arabian League",
-                "League of Legends- Asia Masters",
-                "League of Legends - Esports World Cup",
-                "League of Legends - LIT",
-                "League of Legends - NACL",
-                "League of Legends - LJL",
-                "League of Legends - PLP",
-                "League of Legends - NLC",
-                "League of Legends - ROL",
-                "League of Legends - TCL",
+                "LoL - Arabian League",
+                "LoL- Asia Masters",
+                "LoL - Esports World Cup",
+                "LoL - LIT",
+                "LoL - NACL",
+                "LoL - LJL",
+                "LoL - PLP",
+                "LoL - NLC",
+                "LoL - ROL",
+                "LoL - TCL",
                 "Valorant - VCT EMEA",
                 "Valorant - VCT Americas",
                 "Valorant - VCT China",
