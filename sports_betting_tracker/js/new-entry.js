@@ -744,7 +744,7 @@
         const marketTypeValueTB = document.getElementById('market-type-value-tb');
         
         const betHomeOddsTB = document.getElementById('bet-home-odds');
-        const betAwayOddsTB= document.getElementById('bet-home-odds');
+        const betAwayOddsTB= document.getElementById('bet-away-odds');
         const betDrawOddsTB= document.getElementById('bet-draw-odds');
         const stakeTB = document.getElementById('bet-amount');
         
