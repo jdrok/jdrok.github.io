@@ -52,7 +52,10 @@
                 "1st Half Moneyline - Away",
 
                 "Total Points Odd",
-                "Total Points Even"
+                "Total Points Even",
+
+                "1st Half Handicap - Home",
+                "1st Half Handicap - Away"
             ],
             "football": [
                 "Moneyline - Home",
