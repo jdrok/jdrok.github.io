@@ -1,6 +1,26 @@
 
 
 
+    <div id="data-list">
+        <div class="dflex-sb modal-header">
+            <button class="blue" onclick="closeModal('data-list')"><i class="fa-solid fa-chevron-left"></i></button>
+            <h4>Add Data</h4>
+            <p>&nbsp;</p>
+        </div>
+            
+        <div class="modal-body-container">
+            <div>
+                <br>
+                <div class="dflex-sb">
+                    <input type="text" id="search-data-tb" onkeyup="searchBox(this)">
+                    <button class="blue" id="add-data-btn" onclick="addToLFC()" disabled><i class="fas fa-plus"></i></button>
+                    
+                </div>
+                <table id="data-table"></table>
+            </div>
+        </div>
+    </div>
+
     <div id="bet-info">
        <div class="dflex-sb modal-header">
             <button class="blue" onclick="closeModal('bet-info')"><i class="fa-solid fa-chevron-left"></i></button>
@@ -12,35 +32,143 @@
        </div>
 
        <div class="modal-body-container" id="bet-info-edit">
-            <table>
+        <div class="dflex-sb match-form">
+            <table class="teams-table">
                 <tr>
                     <td>
-                        <p class="label">Status</p>
+                        <p class="label">Sport</p>
+                        <select id="sports-sb"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="label">League</p>
                         <div>
-                            <select id="bet-status-sb">
-                                <option value="running">Running</option>
-                                <option value="won">Won</option>
-                                <option value="lose">Lose</option>
-                                <option value="rejected">Rejected</option>
-                            </select>
+                            <textarea row="2" id="league-tb" class="team-tb" onclick="addData('league')" readonly></textarea>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p class="label">Closing Odds</p>
+                        <p class="label team-home">Home Team Name</p>
                         <div>
-                            <input type="text" class="ta-right" id="bet-closing-odds-tb">
+                            <textarea row="2" id="home-tb" class="team-tb" onclick="addData('home')" readonly></textarea>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <br>
-                        <div class="dflex-sb main-btn-div" id="update-bet-btn-div"></div>
+                        <p class="label team-away">Away Team Name</p>
+                        <div>
+                            <textarea row="2" id="away-tb" class="team-tb" onclick="addData('away')" readonly></textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="match-date-td">
+                        <p class="label">Match Date</p>
+                        <div>
+                            <input type="datetime-local" id="match-date-picker">
+                        </div>
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div class="dflex-sb" id="ne-books">
+            <div>
+                <p class="label">Softbook</p>
+                <select id="softbook-sb"></select>
+            </div>
+            <div>
+                <p class="label">Sharpbook</p>
+                <select id="sharpbook-sb"></select>
+            </div>
+        </div>
+        
+        <div class="dflex-sb bet-type">
+            <div>
+                <p class="label">Market Type</p>
+                <input type="text" id="market-type-tb" onclick="addData('market-type')" readonly>
+            </div>
+            <div>
+                <p class="label">Value</p>
+                <input type="text" class="ta-right" id="market-type-value-tb">
+            </div>
+        </div>
+
+        <div class="bet-form">
+            <div class="dflex-sa">
+                <p class="label">Odds</p>
+                <p class="label">Stake & Payouts</p>
+            </div>
+            <div class="dflex-sa">
+                <div class="bet-odds-container">
+                    <p class="label team-home">Home</p>
+                    <div>
+                        <input type="text" id="bet-home-odds" onblur="checkOddsValidity('home')">
+                        <button class="radio" onclick="selectOddsRadio('home', 'bet-odds-container', this)" id="bet-home-odds-btn"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                    <p class="label">Draw</p>
+                    <div>
+                        <input type="text" id="bet-draw-odds" onblur="checkOddsValidity('draw')">
+                        <button class="radio" onclick="selectOddsRadio('draw', 'bet-odds-container', this)" id="bet-draw-odds-btn"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                    <p class="label team-away">Away</p>
+                    <div>
+                        <input type="text" id="bet-away-odds" onblur="checkOddsValidity('away')">
+                        <button class="radio" onclick="selectOddsRadio('away', 'bet-odds-container', this)" id="bet-away-odds-btn"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
+                <div class="stake-payouts-container">
+                    <p class="label">Stake (₱)</p>                
+                    <div class="dflex-sb">
+                        <button class="blue" onclick="roundOff(true)"><i class="fa-solid fa-arrow-down"></i></button>
+                        <input type="text" onblur="calculatePayouts()" id="bet-amount">
+                        <button class="blue" onclick="roundOff(false)"><i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                    <p class="label">Payout (₱)</p>                
+                    <input type="text" id="bet-payout" disabled>
+                    <p class="label">Payout (incl. bet) (₱)</p>
+                    <input type="text" id="bet-payout-2" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div id="order-date-div">
+            <p class="label">Order Date</p>
+            <div>
+                <div>
+                    <input type="datetime-local" id="order-date-picker">
+                </div>
+            </div>
+        </div>
+        
+        <div class="dflex-sb" id="bet-notes-div">            
+            <textarea rows="5" id="notes-ta"></textarea>
+        </div>
+
+        <div class="dflex-sb status-closing-odds-div">            
+            <div>
+                <p class="label">Status</p>
+                <div>
+                    <select id="bet-status-sb">
+                        <option value="running">Running</option>
+                        <option value="won">Won</option>
+                        <option value="lose">Lose</option>
+                        <option value="pushed">Pushed</option>
+                        <option value="voided">Voided</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <p class="label">Closing Odds</p>
+                <div>
+                    <input type="text" class="ta-right" id="bet-closing-odds-tb">
+                </div>
+            </div>
+        </div>
+        <div class="dflex-sb main-btn-div" id="update-bet-btn-div"></div>
 
        </div>
        <div class="modal-body-container" id="bet-info-view">
@@ -161,12 +289,13 @@
                 <option value="running">Running Bets</option>
                 <option value="won">Won Bets</option>
                 <option value="lose">Lose Bets</option>
-                <option value="rejected">Rejected Bets</option>
+                <option value="pushed">Pushed Bets</option>
+                <option value="voided">Voided Bets</option>
             </select>
         </div>
         <div class="list-container">
             <ul class="detailed" id="bets-ul">
-                <li>
+                <!--<li>
                     <div class="item-header">
                         <p class="ta-left">
                             <span class="number">#333339</span>
@@ -261,7 +390,7 @@
 
                         <button class="orange"><i class="fas fa-edit"></i></button>
                     </div>
-                </li>
+                </li>-->
                 
             </ul>
         </div>
